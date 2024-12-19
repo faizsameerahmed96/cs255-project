@@ -20,7 +20,6 @@ We can run the analysis for random assignment of cities by running:
 - The result is stored under `result/{latest_time_stamp}`
 
 
-
 ## Slides Action Items
 - [x] Create a way to specify custom coordinates (test case), text file
 - [x] Show test case and output in some file
@@ -31,3 +30,8 @@ We can run the analysis for random assignment of cities by running:
 - [ ] Add more description on genetic algorithm, (parameters), held karper
 - [ ] Runtime increase of genetic algorithm and solution quality, compare with held karper (upto 20)
 - [ ] Remove other slides, make it simple
+
+
+- [ ] Only compare genetic and help karp algorithm.
+- [ ] Graph comparing run times for cities, upto 25-30 (till whenever held karp runs)
+- [ ] Graph/Slide comparing the optimal path based on number of cities.
