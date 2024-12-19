@@ -169,7 +169,6 @@ def tsp_held_karp(coordinates):
 
 
 def main():
-    np.random.seed(0)
     parser = argparse.ArgumentParser(
         description="Analyze algorithms from a specified file."
     )

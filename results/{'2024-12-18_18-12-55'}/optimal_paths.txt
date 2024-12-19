@@ -1,7 +1,0 @@
-Genetic Algorithm
-Optimal Path: [5, 16, 17, 10, 3, 6, 12, 2, 19, 18, 0, 15, 9, 8, 4, 13, 11, 7, 1, 14]
-Optimal Distance: 357.5775682458582
-
-Held-Karp Algorithm
-Optimal Path: [0, 15, 11, 13, 4, 8, 9, 16, 5, 14, 1, 7, 17, 10, 3, 6, 12, 2, 19, 18, 0]
-Optimal Distance: 345.2808560945128
