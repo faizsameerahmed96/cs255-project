@@ -1,6 +1,8 @@
 import argparse
+import os
 import random
 import sys
+import time
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -120,6 +122,7 @@ def plot_tsp_path(optimal_path, coordinates):
     plt.xlabel("X Coordinate")
     plt.ylabel("Y Coordinate")
     plt.grid(True)
+    
 
 
 # Held-Karp Algorithm for TSP (Dynamic Programming)
@@ -174,6 +177,10 @@ def main():
         "--file", required=False, help="Path to the file containing algorithms"
     )
 
+    output_folder = {time.strftime("%Y-%m-%d_%H-%M-%S")}
+    if not os.path.exists(f"results/{output_folder}"):
+        os.mkdir(f"results/{output_folder}")
+
     args = parser.parse_args()
 
     file_path = args.file
@@ -196,6 +203,7 @@ def main():
 
     # Plot the result
     plot_tsp_path(optimal_path_genetic_algorithm, coordinates)
+    plt.savefig(f"results/{output_folder}/genetic_algorithm.png")
 
     # Run the Held-Karp Algorithm
     optimal_path_held_karp, optimal_distance_held_karp = tsp_held_karp(coordinates)
@@ -204,6 +212,17 @@ def main():
 
     # Plot the result
     plot_tsp_path(optimal_path_held_karp, coordinates)
+    plt.savefig(f"results/{output_folder}/held_karp.png")
+
+    # Add optimal path for both algorithms to a text file
+    with open(f"results/{output_folder}/optimal_paths.txt", "w") as f:
+        f.write("Genetic Algorithm\n")
+        f.write(f"Optimal Path: {optimal_path_genetic_algorithm}\n")
+        f.write(f"Optimal Distance: {optimal_distance_genetic_algorithm}\n\n")
+
+        f.write("Held-Karp Algorithm\n")
+        f.write(f"Optimal Path: {optimal_path_held_karp}\n")
+        f.write(f"Optimal Distance: {optimal_distance_held_karp}\n")
 
 
 if __name__ == "__main__":
