@@ -1,0 +1,10 @@
+Genetic Algorithm
+Optimal Path: [4, 3, 2, 9, 7, 1, 5, 6, 0, 8]
+Optimal Distance: 308.743962969929
+
+Genetic Algorithm Execution Time: 12.86 seconds
+
+Held-Karp Algorithm
+Optimal Path: [0, 6, 5, 1, 7, 9, 2, 3, 4, 8, 0]
+Optimal Distance: 308.743962969929
+Held-Karp Algorithm Execution Time: 0.01 seconds
