@@ -197,6 +197,8 @@ def main():
                 x, y = map(int, line.strip().split(","))
                 coordinates.append([x, y])
 
+        coordinates = np.array(coordinates)
+
     # Run the Genetic Algorithm
     genetic_execution_time = time.time()
     optimal_path_genetic_algorithm, optimal_distance_genetic_algorithm = (
