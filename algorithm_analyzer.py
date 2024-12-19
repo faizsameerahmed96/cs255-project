@@ -122,7 +122,6 @@ def plot_tsp_path(optimal_path, coordinates):
     plt.xlabel("X Coordinate")
     plt.ylabel("Y Coordinate")
     plt.grid(True)
-    
 
 
 # Held-Karp Algorithm for TSP (Dynamic Programming)
@@ -170,6 +169,7 @@ def tsp_held_karp(coordinates):
 
 
 def main():
+    np.random.seed(0)
     parser = argparse.ArgumentParser(
         description="Analyze algorithms from a specified file."
     )
@@ -185,14 +185,20 @@ def main():
 
     file_path = args.file
 
-    np.random.seed(0)
-
-    number_of_cities = 10
-
-    # Randomly generate coordinates for each city
-    coordinates = np.random.randint(0, 100, (number_of_cities, 2))
+    if file_path is None:
+        print("Enter the number of cities: ")
+        number_of_cities = int(input())
+        coordinates = np.random.randint(0, 100, (number_of_cities, 2))
+    else:
+        # read file and get coordinates
+        with open(file_path, "r") as f:
+            coordinates = []
+            for line in f:
+                x, y = map(int, line.strip().split(","))
+                coordinates.append([x, y])
 
     # Run the Genetic Algorithm
+    genetic_execution_time = time.time()
     optimal_path_genetic_algorithm, optimal_distance_genetic_algorithm = (
         genetic_algorithm(
             coordinates, pop_size=100, generations=500, mutation_rate=0.01
@@ -200,15 +206,18 @@ def main():
     )
     print(f"Optimal Path: {optimal_path_genetic_algorithm}")
     print(f"Optimal Distance: {optimal_distance_genetic_algorithm}")
+    genetic_execution_time = time.time() - genetic_execution_time
 
     # Plot the result
     plot_tsp_path(optimal_path_genetic_algorithm, coordinates)
     plt.savefig(f"results/{output_folder}/genetic_algorithm.png")
 
     # Run the Held-Karp Algorithm
+    optimal_execution_time = time.time()
     optimal_path_held_karp, optimal_distance_held_karp = tsp_held_karp(coordinates)
     print(f"Optimal Path (Held-Karp): {optimal_path_held_karp}")
     print(f"Optimal Distance (Held-Karp): {optimal_distance_held_karp}")
+    optimal_execution_time = time.time() - optimal_execution_time
 
     # Plot the result
     plot_tsp_path(optimal_path_held_karp, coordinates)
@@ -219,10 +228,12 @@ def main():
         f.write("Genetic Algorithm\n")
         f.write(f"Optimal Path: {optimal_path_genetic_algorithm}\n")
         f.write(f"Optimal Distance: {optimal_distance_genetic_algorithm}\n\n")
+        f.write(f"Genetic Algorithm Execution Time: {genetic_execution_time:.2f} seconds\n\n")
 
         f.write("Held-Karp Algorithm\n")
         f.write(f"Optimal Path: {optimal_path_held_karp}\n")
         f.write(f"Optimal Distance: {optimal_distance_held_karp}\n")
+        f.write(f"Held-Karp Algorithm Execution Time: {optimal_execution_time:.2f} seconds\n")
 
 
 if __name__ == "__main__":
